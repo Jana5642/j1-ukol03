@@ -6,13 +6,10 @@ package cz.czechitas.ukol3;
 public class HlavniProgram {
 
     public static void main(String... args) {
-        //TODO tady bude váš kód - vytvoření instance třídy Pocitac, zapnutí, vpynutí, výpis hodnot.
+        
         System.out.println("Program spuštěn.");
 
         Pocitac janyPocitac = new Pocitac();
-        janyPocitac.setCpu();
-        janyPocitac.setRam();
-        janyPocitac.setPevnyDisk();
 
 
         Disk janyDisk = new Disk();
@@ -31,10 +28,15 @@ public class HlavniProgram {
         janyPocitac.setRam(janyPamet);
         janyPocitac.setPevnyDisk(janyDisk);
 
-        System.out.println(janyPocitac.toString());
+
+
+        System.out.println(janyPocitac);
 
         janyPocitac.zapniSe();
         janyPocitac.vypniSe();
+
+        janyPocitac.vytvorSouborOVelikosti(234);
+        janyPocitac.vymazSouboryOVelikosti(432);
 
 
 

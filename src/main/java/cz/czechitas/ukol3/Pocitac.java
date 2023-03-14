@@ -7,7 +7,6 @@ public class Pocitac {
     private Disk pevnyDisk;
 
 
-
     public Procesor getCpu() {
         return cpu;
     }
@@ -34,42 +33,70 @@ public class Pocitac {
 
     @Override
     public String toString() {
-        return "Pocitac = " + " cpu = " + cpu + "/" + " ram = " + ram + "/" + " pevnyDisk = " + pevnyDisk;
+        return "Počítač = " + " cpu = " + cpu + "/" + " ram = " + ram + "/" + " pevnýDisk = " + pevnyDisk;
     }
 
-    public void isJeZapnuty() {
-        if (!jeZapnuty){
+    public boolean jeZapnuty() {
+        return jeZapnuty;
+    }
+
+
+    public void vypniSe() {
+        if (jeZapnuty) {
+            System.out.println("Vypínám počítač");
+            jeZapnuty = false;
+        } else {
+            System.err.println("Počítač už je vypnutý");
+        }
+    }
+
+    public void zapniSe() {
+        if (jeZapnuty) {
+            System.err.println("Počítač už je zapnutý");
+
+        } else {
+            if (this.ram == null || this.cpu == null || this.pevnyDisk == null) {
+                System.err.println("Počítač nejde zapnout, protože musí obsahovat všechny části");
+
+            } else {
+                jeZapnuty = true;
+                System.out.println("Zapínám počítač");
+            }
+        }
+
+    }
+
+
+    public void vytvorSouborOVelikosti(long velikost) {
+        if (jeZapnuty) {
+            if (pevnyDisk.getVyuziteMisto() + velikost < pevnyDisk.getKapacita()) {
+                System.out.println("Ukládám soubor");
+                pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() + velikost);
+            } else {
+                System.err.println("Využité místo je větší než kapacita");
+            }
             System.out.println("Počítač je zapnutý");
-            return;
         }
+
+        }
+    public void vymazSouboryOVelikosti(long velikost) {
         if (jeZapnuty){
-            System.out.println("Počítač je vypnutý");
-            return;
-        }
-        this.jeZapnuty = jeZapnuty;
-    }
-
-
-
-    public void vypniSe(){
-        if (!jeZapnuty){
+            if (pevnyDisk.getVyuziteMisto() - velikost > 0){
+                System.out.println("Ukládám soubor");
+                pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() - velikost);
+                }else {
+                    System.err.println("Využité místo je menší než nula");
+                }
             System.out.println("Počítač je zapnutý");
-        }else{
-            System.out.println("Vypni počítač");
+            }
+
         }
-    }
-    public void zapniSe(){
-        if (jeZapnuty){
-            System.out.println("Počítač je vypnutý");
-        }
-        if (this.ram == null || this.cpu == null || this.pevnyDisk == null){
-            System.out.println("Musí obsahovat všechny části");
-        }else{
-            System.out.println("Zapni počítač");
-        }
+
+
 
     }
 
 
 
-}
+
+
